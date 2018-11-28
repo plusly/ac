@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.ac.sc.mapper.TicketMapper" >
+  <resultMap id="BaseResultMap" type="com.atguigu.ac.sc.entity.Ticket" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="memberid" property="memberid" jdbcType="INTEGER" />
+    <result column="piid" property="piid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="authcode" property="authcode" jdbcType="CHAR" />
+    <result column="pstep" property="pstep" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_ticket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.ac.sc.entity.Ticket" >
+    insert into t_ticket ( memberid, piid, 
+      status, authcode, pstep)
+    values ( #{memberid,jdbcType=INTEGER}, #{piid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{authcode,jdbcType=CHAR}, #{pstep,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.ac.sc.entity.Ticket" >
+    update t_ticket
+    set memberid = #{memberid,jdbcType=INTEGER},
+      piid = #{piid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      authcode = #{authcode,jdbcType=CHAR},
+      pstep = #{pstep,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, memberid, piid, status, authcode, pstep
+    from t_ticket
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectBymemberId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, memberid, piid, status, authcode, pstep
+    from t_ticket
+    where memberid = #{memberId}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, memberid, piid, status, authcode, pstep
+    from t_ticket
+  </select>
+  <update id="updateTicketPstep">
+  	update t_ticket
+    set pstep = #{param2}
+    where memberid = #{param1}
+  </update>
+  <update id="updateTicketAuthCode">
+  	update t_ticket
+    set authcode = #{param2}
+    where memberid = #{param1}
+  </update>
+  <select id="selectAuthCodeByMemberId" resultType="java.lang.String">
+  	select authcode
+    from t_ticket
+    where memberid = #{memberId}
+  </select>
+</mapper>

@@ -1,0 +1,15 @@
+server:
+  port: 1101
+  
+spring:
+  freemarker:
+    suffix: .ftl
+    template-loader-path: classpath:/template/
+  application:
+    name: ac-sc-manager-consumer
+    
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:1000/eureka

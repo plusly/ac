@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.ac.sc.mapper.MemberCertMapper" >
+  <resultMap id="BaseResultMap" type="com.atguigu.ac.sc.entity.MemberCert" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="accttype" property="accttype" jdbcType="CHAR" />
+    <result column="certid" property="certid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.atguigu.ac.sc.entity.MemberCert" >
+    insert into t_account_type_cert (id, accttype, certid
+      )
+    values (#{id,jdbcType=INTEGER}, #{accttype,jdbcType=CHAR}, #{certid,jdbcType=INTEGER}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, accttype, certid
+    from t_account_type_cert
+  </select>
+  <select id="selectListCertIdByAccType" resultType="java.lang.Integer">
+    select certid
+    from t_account_type_cert
+    where accttype=#{accType}
+  </select>
+</mapper>
